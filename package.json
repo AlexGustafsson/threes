@@ -29,7 +29,8 @@
   "dependencies": {
     "canvas": "^2.4.1",
     "debug": "^4.1.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "seedrandom": "^3.0.1"
   },
   "xo": {
     "space": 2,
