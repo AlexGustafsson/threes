@@ -16,8 +16,8 @@ async function generate(username, options) {
   const ctx = canvas.getContext('2d');
   const random = new Random(username);
 
-  const wantedWidth = 50;
-  const wantedHeight = 50;
+  const wantedWidth = Math.floor(1 / 6 * options.width);
+  const wantedHeight = Math.floor(1 / 6 * options.height);
 
   const columns = Math.floor(options.width / wantedWidth);
   const rows = Math.floor(options.height / wantedHeight);
