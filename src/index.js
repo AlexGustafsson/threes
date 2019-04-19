@@ -3,6 +3,7 @@ const stream = require('stream');
 const debug = require('debug')('threes:app');
 const express = require('express');
 
+const generators = require('./generators');
 const {generate} = require('./generator');
 
 const PORT = process.env['PORT'] || 3000;
@@ -12,45 +13,54 @@ const app = express();
 app.get('/suite/:username', (req, res) => {
   res.contentType('text/html');
   const {username} = req.params;
+  let body = '';
+  for (const generator of Object.keys(generators)) {
+    body += `
+    <h1>${generator}</h1>
+    <div>
+      <div>
+        <h1>PNG for '${username}'</h1>
+        <img src="/avatar/${generator}/${username}.png" width="150" height="150" />
+      </div>
+      <div>
+        <h1>JPEG for '${username}'</h1>
+        <img src="/avatar/${generator}/${username}.jpg" width="150" height="150" />
+      </div>
+      <div>
+        <h1>SVG for '${username}'</h1>
+        <img src="/avatar/${generator}/${username}.svg" width="150" height="150" />
+      </div>
+    </div>
+    `;
+  }
   res.send(`
     <html>
     <head>
       <style>
-        body {display: flex; flex-direction: row;}
-        div {margin: 15px;}
+        body > div {display: flex; flex-direction: row;}
+        body > div > div {margin: 15px;}
         img {border: 2px solid rgba(0, 0, 0, 0.2);}
       </style>
     </head>
     <body>
-      <div>
-        <h1>PNG for '${username}'</h1>
-        <img src="/${username}.png" width="150" height="150" />
-      </div>
-      <div>
-        <h1>JPEG for '${username}'</h1>
-        <img src="/${username}.jpg" width="150" height="150" />
-      </div>
-      <div>
-        <h1>SVG for '${username}'</h1>
-        <img src="/${username}.svg" width="150" height="150" />
-      </div>
+      ${body}
     </body>
     </html>
   `);
 });
 
-app.get('/:username.png', async (req, res) => {
-  const canvas = await generate(req.params['username']);
+app.get('/avatar/:style/:username.png', async (req, res) => {
+  const canvas = await generate(req.params['username'], {style: req.params['style']});
   canvas.createPNGStream().pipe(res);
 });
 
-app.get('/:username.jpg', async (req, res) => {
-  const canvas = await generate(req.params['username']);
+app.get('/avatar/:style/:username.jpg', async (req, res) => {
+  const canvas = await generate(req.params['username'], {style: req.params['style']});
   canvas.createJPEGStream().pipe(res);
 });
 
-app.get('/:username.svg', async (req, res) => {
-  const canvas = await generate(req.params['username'], {format: 'svg'});
+app.get('/avatar/:style/:username.svg', async (req, res) => {
+  const canvas = await generate(req.params['username'], {style: req.params['style'], format: 'svg'});
 
   const readStream = new stream.PassThrough();
   readStream.end(canvas.toBuffer());
