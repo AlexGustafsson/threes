@@ -20,7 +20,7 @@ async function generate(username, options) {
   const random = new Random(username);
 
   if (generators[options.style]) {
-    random.palette = palettes[options.style];
+    random.palette = palettes[options.style] || palettes.threes;
     generators[options.style](username, ctx, random, options);
   }
 

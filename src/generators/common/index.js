@@ -1,3 +1,4 @@
 module.exports = {
-  primitives: require('./primitives')
+  primitives: require('./primitives'),
+  utils: require('./utils')
 };

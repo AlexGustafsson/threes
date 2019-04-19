@@ -20,6 +20,10 @@ class Random {
   float() {
     return this.random();
   }
+
+  floatBetween(min, max) {
+    return Math.floor((this.random() * (max - min + 1)) + min);
+  }
 }
 
 module.exports = Random;

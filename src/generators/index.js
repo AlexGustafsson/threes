@@ -1,4 +1,5 @@
 module.exports = {
   threes: require('./threes'),
-  github: require('./github')
+  github: require('./github'),
+  crossStitch: require('./cross-stitch')
 };
