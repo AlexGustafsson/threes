@@ -3,6 +3,7 @@ const {createCanvas} = require('canvas');
 
 const Random = require('./random');
 const generators = require('./generators');
+const palettes = require('./palettes');
 
 async function generate(username, options) {
   debug(`Generating avatar for ${username}`);
@@ -18,10 +19,10 @@ async function generate(username, options) {
   const ctx = canvas.getContext('2d');
   const random = new Random(username);
 
-  if (options.style === 'github')
-    await generators.github(username, ctx, random, options);
-  else
-    await generators.threes(username, ctx, random, options);
+  if (generators[options.style]) {
+    random.palette = palettes[options.style];
+    generators[options.style](username, ctx, random, options);
+  }
 
   return canvas;
 }
