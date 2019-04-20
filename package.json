@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "DEBUG=threes:* node src/index.js",
-    "start": "NODE_ENV=production node src/cli.js",
+    "start": "NODE_ENV=production node src/index.js",
+    "build": "./build.sh",
     "lint": "xo",
     "test": "ava",
     "coverage": "nyc ava -t",
