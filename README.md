@@ -9,7 +9,25 @@
 
 ##### Quickstart
 
-TODO
+###### Docker
+```
+# Clone the repository
+git clone https://github.com/AlexGustafsson/threes.git && cd threes
+# Build the Docker image
+npm run build
+# Run the image
+docker run -p 3000:3000 threes:latest
+```
+
+##### Directly
+```
+# Clone the repository
+git clone https://github.com/AlexGustafsson/threes.git && cd threes
+# Install dependencies
+npm install
+# Start the server
+npm start
+```
 
 ### Documentation
 
