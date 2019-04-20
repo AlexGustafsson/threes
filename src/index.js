@@ -7,8 +7,18 @@ const generators = require('./generators');
 const {generate} = require('./generator');
 
 const PORT = process.env['PORT'] || 3000;
+// Cache images for a month
+const CACHE_TIME = 60 * 60 * 24 * 30;
 
 const app = express();
+
+if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    res.removeHeader('X-Powered-By');
+    res.set('Cache-Control', `public, max-age=${CACHE_TIME}`);
+    next();
+  });
+}
 
 app.get('/suite/:username', (req, res) => {
   res.contentType('text/html');
