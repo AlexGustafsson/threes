@@ -35,7 +35,7 @@ function generate(username, ctx, random, options) {
 
   const transparency = random.floatBetween(MIN_TRANSPARENCY, MAX_TRANSPARENCY).toFixed(4);
   const transparentWhite = `rgba(255, 255, 255, ${transparency})`;
-  console.log(transparency);
+
   ctx.strokeStyle = transparentWhite;
   rotateAroundCenter(ctx, 45);
   for (let y = 0; y < ROWS; y++) {
