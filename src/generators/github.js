@@ -6,13 +6,13 @@ const MAX_DRAW_CHANCE = 0.75;
 
 function generate(username, ctx, random, options) {
   const margin = {
-    horizontal: RELATIVE_MARGIN * options.width,
-    vertical: RELATIVE_MARGIN * options.height
+    horizontal: Math.round(RELATIVE_MARGIN * options.width),
+    vertical: Math.round(RELATIVE_MARGIN * options.height)
   };
 
   const cellSize = {
-    width: (options.width - (2 * margin.horizontal)) / COLUMNS,
-    height: (options.height - (2 * margin.vertical)) / COLUMNS
+    width: Math.round((options.width - (2 * margin.horizontal)) / COLUMNS),
+    height: Math.round((options.height - (2 * margin.vertical)) / COLUMNS)
   };
 
   const backgroundColor = '#F0F0F0';
