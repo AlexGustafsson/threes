@@ -26,10 +26,10 @@ function generate(username, ctx, random, options) {
   ctx.fillRect(0, 0, options.width, options.height);
 
   const stitches = [];
-  const stichesCount = random.floatBetween(MIN_STITCHES, MAX_STITCHES);
+  const stichesCount = random.intBetween(MIN_STITCHES, MAX_STITCHES);
   for (let i = 0, previousX = -heightDifference; i < stichesCount; i++) {
-    const space = random.floatBetween(RELATIVE_MIN_SPACE * diagonal, RELATIVE_MAX_SPACE * diagonal);
-    const width = random.floatBetween(RELATIVE_MIN_WIDTH * diagonal, RELATIVE_MAX_WIDTH * diagonal);
+    const space = random.intBetween(RELATIVE_MIN_SPACE * diagonal, RELATIVE_MAX_SPACE * diagonal);
+    const width = random.intBetween(RELATIVE_MIN_WIDTH * diagonal, RELATIVE_MAX_WIDTH * diagonal);
 
     stitches.push({
       x: previousX + space,

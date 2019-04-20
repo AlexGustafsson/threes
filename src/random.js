@@ -22,6 +22,10 @@ class Random {
   }
 
   floatBetween(min, max) {
+    return (this.random() * (max - min)) + min;
+  }
+
+  intBetween(min, max) {
     return Math.floor((this.random() * (max - min + 1)) + min);
   }
 }
