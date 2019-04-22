@@ -1,7 +1,7 @@
 const COLUMNS = 12;
 const ROWS = 12;
 const MIN_RELATIVE_STROKE_WIDTH = 0.003;
-const MAX_RELATIVE_STROKE_WIDTH = 0.01;
+const MAX_RELATIVE_STROKE_WIDTH = 0.02;
 const MIN_TRANSPARENCY = 0.02;
 const MAX_TRANSPARENCY = 0.05;
 
@@ -20,7 +20,7 @@ function generate(username, ctx, random, options) {
   const heightDifference = diagonal - options.height;
   diagonal += 2 * heightDifference;
   ctx.lineWidth = random.floatBetween(MIN_RELATIVE_STROKE_WIDTH * diagonal, MAX_RELATIVE_STROKE_WIDTH * diagonal);
-
+  console.log(ctx.lineWidth);
   const cellSize = {
     width: diagonal / COLUMNS,
     height: diagonal / ROWS
