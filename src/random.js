@@ -28,6 +28,12 @@ class Random {
   intBetween(min, max) {
     return Math.floor((this.random() * (max - min + 1)) + min);
   }
+
+  element(...values) {
+    if (Array.isArray(values[0]))
+      values = values[0];
+    return values[this.intBetween(0, values.length)];
+  }
 }
 
 module.exports = Random;
