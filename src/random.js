@@ -32,7 +32,12 @@ class Random {
   element(...values) {
     if (Array.isArray(values[0]))
       values = values[0];
+    console.log(values);
     return values[this.intBetween(0, values.length)];
+  }
+
+  elements(count, values) {
+    return new Array(count).fill().map(() => this.element(values));
   }
 }
 

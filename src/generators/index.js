@@ -3,5 +3,6 @@ module.exports = {
   github: require('./github'),
   crossStitch: require('./cross-stitch'),
   faded: require('./faded'),
-  stackexchange: require('./stackexchange')
+  stackexchange: require('./stackexchange'),
+  pizza: require('./pizza')
 };
