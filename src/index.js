@@ -31,12 +31,12 @@ app.get('/suite/:username', (req, res) => {
 });
 
 app.get('/avatar/:style/:username.png', async (req, res) => {
-  const canvas = await generate(req.params['username'], {style: req.params['style']});
+  const canvas = await generate(req.params['username'], {style: req.params['style'], format: 'png'});
   canvas.createPNGStream().pipe(res);
 });
 
 app.get('/avatar/:style/:username.jpg', async (req, res) => {
-  const canvas = await generate(req.params['username'], {style: req.params['style']});
+  const canvas = await generate(req.params['username'], {style: req.params['style'], format: 'jpg'});
   canvas.createJPEGStream().pipe(res);
 });
 

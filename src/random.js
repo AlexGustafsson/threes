@@ -39,6 +39,11 @@ class Random {
   elements(count, values) {
     return new Array(count).fill().map(() => this.element(values));
   }
+
+  // Returns true with a probability roughly following the percentile given
+  bool(percentile = 0.5) {
+    return this.float() <= percentile;
+  }
 }
 
 module.exports = Random;

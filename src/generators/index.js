@@ -4,5 +4,6 @@ module.exports = {
   crossStitch: require('./cross-stitch'),
   faded: require('./faded'),
   stackexchange: require('./stackexchange'),
-  pizza: require('./pizza')
+  pizza: require('./pizza'),
+  hexzag: require('./hexzag')
 };
