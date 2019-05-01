@@ -4,7 +4,7 @@
   "description": "Easily create avatars from a username - Avatar as a Service",
   "main": "src/index.js",
   "scripts": {
-    "dev": "DEBUG=threes:* node src/index.js",
+    "dev": "DEBUG=threes:* nodemon --watch src src/index.js",
     "start": "NODE_ENV=production node src/index.js",
     "build": "./build.sh",
     "lint": "xo",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "ava": "^1.3.1",
     "jsinspect": "^0.12.7",
+    "nodemon": "^1.19.0",
     "nyc": "^14.0.0",
     "xo": "^0.24.0"
   },
