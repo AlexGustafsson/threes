@@ -1,10 +1,14 @@
 const COLUMNS = 16;
 const ROWS = 32;
 
-const MIN_POINTS = ROWS / 2;
+const MIN_POINTS = 5;
+const PREFFERED_MIN_POINTS = ROWS / 2;
 const MAX_POINTS = ROWS;
 
-const MAX_MOVEMENTS = 1;
+const MAX_MOVEMENTS = 5;
+const CONTINUE_LINE_PERCENTILE = 0.9;
+
+const STROKE = false;
 
 const STATE = Object.freeze({
   startedMove: Symbol('StartedMove'),
@@ -27,22 +31,37 @@ async function generate(username, ctx, random, options) {
   };
 
   // Draw grid for debugging
-  ctx.fillStyle = '#FF0000';
+  /*ctx.fillStyle = '#FF0000';
   for (let y = 0; y < ROWS; y++) {
     for (let x = 0; x < COLUMNS; x++) {
       ctx.beginPath();
       ctx.arc(x * spacing.horizontal, y * spacing.vertical, 2, 0, 2 * Math.PI);
       ctx.fill();
     }
-  }
+  }*/
+
+  const positions = {};
 
   // Generate lines
+  let minPoints = PREFFERED_MIN_POINTS;
   const lines = [];
-  for (let i = 0; i < 3; i++) {
+  for (let createdLines = 0, tries = 0; tries < 1000 && createdLines < 10; tries++) {
     const x = random.intBetween(0, Math.floor(COLUMNS / 2));
-    const y = random.intBetween(0, Math.floor(ROWS * 0.5));
-    const line = generateLine(x, y, random);
+    const y = random.intBetween(0, Math.floor(ROWS / 2));
+    const line = generateLine(x, y, random, minPoints, MAX_POINTS);
+    const points = [...line.left, ...line.right];
+    // Stop if the grid position has been used
+    if (points.some(point => positions[`${point.x}:${point.y}`] || point.x < 0 || point.x > (COLUMNS / 2))) {
+      minPoints = Math.max(MIN_POINTS, minPoints - 1);
+      continue;
+    }
+
+    // Add the used points to the grid
+    for (const point of points)
+      positions[`${point.x}:${point.y}`] = true;
+
     lines.push(line);
+    createdLines++;
   }
 
   // Draw lines
@@ -77,16 +96,17 @@ function drawLine(ctx, line, spacing, mirrored = false) {
     ctx.lineTo(left[i].x * spacing.horizontal, left[i].y * spacing.vertical);
   ctx.lineTo(right[0].x * spacing.horizontal, right[0].y * spacing.vertical);
   ctx.fill();
-  ctx.stroke();
+  if (STROKE)
+    ctx.stroke();
 }
 
-function generateLine(x, y, random) {
+function generateLine(x, y, random, minPoints, maxPoints) {
   const line = startLine(x, y, random);
   let state = STATE.down;
   let movements = 0;
-  for (let i = 0; i < random.intBetween(MIN_POINTS, MAX_POINTS); i++) {
+  for (let i = 0; i < random.intBetween(minPoints, maxPoints); i++) {
     if (state === STATE.down) {
-      if (random.bool(0.7) || movements === MAX_MOVEMENTS) {
+      if (random.bool(CONTINUE_LINE_PERCENTILE) || movements === MAX_MOVEMENTS) {
         continueLine(line);
       } else {
         startLineMove(line, random);
@@ -160,7 +180,7 @@ function continueLineMove(line) {
 function endLineMove(line) {
   const [left] = line.left.slice(-1);
   const [right] = line.right.slice(-1);
-  console.log(left, right);
+
   if (left.y > right.y)
     line.right.push({x: right.x, y: right.y + 1});
   else
