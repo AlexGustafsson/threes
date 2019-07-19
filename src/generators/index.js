@@ -5,5 +5,6 @@ module.exports = {
   faded: require('./faded'),
   stackexchange: require('./stackexchange'),
   pizza: require('./pizza'),
-  hexzag: require('./hexzag')
+  hexzag: require('./hexzag'),
+  helsinki: require('./helsinki')
 };
