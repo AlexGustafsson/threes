@@ -45,12 +45,14 @@ async function generate(username, ctx, random, options) {
   ctx.lineTo(options.width, 0);
   ctx.fill();
 
-  for (let y = 0; y < options.height; y += NOISE_SCALE) {
-    for (let x = 0; x < options.width; x += NOISE_SCALE) {
-      const gray = random.intBetween(50, 255);
-      const opacity = random.floatBetween(0, 0.05);
-      ctx.fillStyle = `rgba(${gray}, ${gray}, ${gray}, ${opacity})`;
-      ctx.fillRect(x, y, NOISE_SCALE, NOISE_SCALE);
+  if (options.format !== 'svg') {
+    for (let y = 0; y < options.height; y += NOISE_SCALE) {
+      for (let x = 0; x < options.width; x += NOISE_SCALE) {
+        const gray = random.intBetween(50, 255);
+        const opacity = random.floatBetween(0, 0.05);
+        ctx.fillStyle = `rgba(${gray}, ${gray}, ${gray}, ${opacity})`;
+        ctx.fillRect(x, y, NOISE_SCALE, NOISE_SCALE);
+      }
     }
   }
 }
