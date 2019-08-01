@@ -32,8 +32,7 @@ class Random {
   element(...values) {
     if (Array.isArray(values[0]))
       values = values[0];
-    console.log(values);
-    return values[this.intBetween(0, values.length)];
+    return values[this.intBetween(0, values.length - 1)];
   }
 
   elements(count, values) {

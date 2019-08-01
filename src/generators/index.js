@@ -6,5 +6,6 @@ module.exports = {
   stackexchange: require('./stackexchange'),
   pizza: require('./pizza'),
   hexzag: require('./hexzag'),
-  helsinki: require('./helsinki')
+  helsinki: require('./helsinki'),
+  scandinavian: require('./scandinavian')
 };
