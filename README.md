@@ -5,11 +5,15 @@
 
 > Note: this is currently alpha level software. Stay tuned for updates!
 
+<p align="center">
+  <img src=".github/screenshot.png">
+</p>
+
 ### Setting up
 
 ##### Quickstart
 
-###### Docker
+###### Using Docker
 ```
 # Clone the repository
 git clone https://github.com/AlexGustafsson/threes.git && cd threes
@@ -19,7 +23,7 @@ npm run build
 docker run -p 3000:3000 threes:latest
 ```
 
-##### Directly
+##### Running from source
 ```
 # Clone the repository
 git clone https://github.com/AlexGustafsson/threes.git && cd threes
@@ -31,7 +35,13 @@ npm start
 
 ### Documentation
 
-TODO
+The documentation is currently a bit sparse. Refer to the source code or feel free to open an issue.
+
+Start Threes with `npm start`. You can specify a port using the environment variable `PORT`. The default is 3000.
+
+The service is now accessible via `localhost:3000`. To test all available styles and formats, visit `http://localhost:3000/suite/any-username`.
+
+To reference a specific style and format, use `http://localhost:3000/avatar/helsinki/foo.png` where `helsinki` is an available style.
 
 ### Contributing
 
