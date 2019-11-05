@@ -3,7 +3,7 @@
 ***
 ![npm badge](https://img.shields.io/npm/v/threes.svg)
 
-> Note: this is currentyl alpha level software. Stay tuned for updates!
+> Note: this is currently alpha level software. Stay tuned for updates!
 
 ### Setting up
 
