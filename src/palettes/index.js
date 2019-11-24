@@ -3,5 +3,6 @@ module.exports = {
   github: require('./github'),
   crossStitch: require('./cross-stitch'),
   helsinki: require('./helsinki'),
-  scandinavian: require('./scandinavian')
+  scandinavian: require('./scandinavian'),
+  charm: require('./charm')
 };

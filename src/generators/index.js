@@ -7,5 +7,6 @@ module.exports = {
   pizza: require('./pizza'),
   hexzag: require('./hexzag'),
   helsinki: require('./helsinki'),
-  scandinavian: require('./scandinavian')
+  scandinavian: require('./scandinavian'),
+  charm: require('./charm')
 };
