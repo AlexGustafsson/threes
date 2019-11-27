@@ -9,5 +9,6 @@ module.exports = {
   helsinki: require('./helsinki'),
   scandinavian: require('./scandinavian'),
   charm: require('./charm'),
-  scale: require('./scale')
+  scale: require('./scale'),
+  tribute: require('./tribute')
 };
