@@ -4,5 +4,6 @@ module.exports = {
   crossStitch: require('./cross-stitch'),
   helsinki: require('./helsinki'),
   scandinavian: require('./scandinavian'),
-  charm: require('./charm')
+  charm: require('./charm'),
+  scale: require('./scale')
 };

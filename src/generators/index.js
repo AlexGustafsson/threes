@@ -8,5 +8,6 @@ module.exports = {
   hexzag: require('./hexzag'),
   helsinki: require('./helsinki'),
   scandinavian: require('./scandinavian'),
-  charm: require('./charm')
+  charm: require('./charm'),
+  scale: require('./scale')
 };
