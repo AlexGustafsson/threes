@@ -10,5 +10,6 @@ module.exports = {
   scandinavian: require('./scandinavian'),
   charm: require('./charm'),
   scale: require('./scale'),
-  tribute: require('./tribute')
+  tribute: require('./tribute'),
+  gemoetric: require('./geometric')
 };
