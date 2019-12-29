@@ -1,6 +1,6 @@
 {
   "name": "threes",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Easily create avatars from a username - Avatar as a Service",
   "main": "src/index.js",
   "scripts": {
