@@ -4,13 +4,15 @@
   "description": "Easily create avatars from a username - Avatar as a Service",
   "main": "src/index.js",
   "scripts": {
-    "dev": "DEBUG=threes:* nodemon --watch src src/index.js",
-    "start": "NODE_ENV=production node src/index.js",
-    "build": "./build.sh",
-    "lint": "xo",
+    "dev": "npm run copy-static-files && concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "start": "NODE_ENV=production node -r source-map-support/register dist/server.js",
+    "build": "npm run copy-static-files && tsc",
+    "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --quiet --fix",
     "test": "ava",
     "coverage": "nyc ava -t",
-    "check-duplicate-code": "jsinspect -t 20 src"
+    "watch-ts": "tsc -w",
+    "watch-node": "DEBUG=threes:* nodemon -r source-map-support/register dist/server.js",
+    "copy-static-files": "mkdir -p dist/demo && cp src/demo/*.html dist/demo"
   },
   "keywords": [
     "avatar"
@@ -22,53 +24,25 @@
   "author": "Alex Gustafsson",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^2.4.0",
-    "jsinspect": "^0.12.7",
-    "nodemon": "^2.0.1",
-    "nyc": "^14.1.1",
-    "xo": "^0.25.3"
+    "@types/debug": "^4.1.5",
+    "@types/express": "^4.17.8",
+    "@types/seedrandom": "^2.4.28",
+    "@types/skia-canvas": "^0.9.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "ava": "^3.12.1",
+    "concurrently": "^5.3.0",
+    "eslint": "^7.9.0",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
+    "typescript": "^4.0.3"
   },
   "dependencies": {
-    "canvas": "^2.6.0",
-    "debug": "^4.1.1",
+    "debug": "^4.2.0",
     "express": "^4.17.1",
-    "seedrandom": "^3.0.5"
-  },
-  "xo": {
-    "space": 2,
-    "esnext": true,
-    "rules": {
-      "curly": [
-        "error",
-        "multi-or-nest",
-        "consistent"
-      ],
-      "no-use-before-define": [
-        "error",
-        {
-          "classes": false
-        }
-      ],
-      "unicorn/catch-error-name": [
-        "error",
-        {
-          "name": "error"
-        }
-      ],
-      "dot-notation": [
-        "off"
-      ],
-      "quote-props": [
-        "off"
-      ],
-      "object-curly-spacing": [
-        "error",
-        "never"
-      ],
-      "padding-line-between-statements": [
-        "off"
-      ]
-    }
+    "seedrandom": "^3.0.5",
+    "skia-canvas": "^0.9.19",
+    "source-map-support": "^0.5.19"
   },
   "ava": {
     "files": [

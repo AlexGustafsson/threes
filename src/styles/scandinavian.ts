@@ -1,3 +1,6 @@
+import {GeneratorCallable} from "../generator";
+import Random from "../random";
+
 const ROWS = 4;
 const COLUMNS = 4;
 
@@ -7,15 +10,25 @@ const MAX_RELATIVE_CELL_WIDTH = 1 / COLUMNS + 0.1;
 const MIN_RELATIVE_CELL_HEIGHT = 1 / ROWS - 0.1;
 const MAX_RELATIVE_CELL_HEIGHT = 1 / ROWS + 0.1;
 
+export const palette = [
+  "#37313F",
+  "#A09EB1",
+  "#EAE0E1",
+  "#E0B4C1",
+  "#C13E68",
+  "#404B78",
+  "#0EB285"
+];
+
 // https://www.amazon.com/Ahawoso-Mousepads-Minimalistic-Geometric-Scandinavian/dp/B07PXZ2DT8
-async function generate(username, ctx, random, options) {
-  const minCellWidth = MIN_RELATIVE_CELL_WIDTH * options.width;
-  const maxCellWidth = MAX_RELATIVE_CELL_WIDTH * options.width;
-  const minCellHeight = MIN_RELATIVE_CELL_HEIGHT * options.height;
-  const maxCellHeight = MAX_RELATIVE_CELL_HEIGHT * options.height;
+export const generator: GeneratorCallable = async (ctx, random) => {
+  const minCellWidth = MIN_RELATIVE_CELL_WIDTH * ctx.canvas.width;
+  const maxCellWidth = MAX_RELATIVE_CELL_WIDTH * ctx.canvas.width;
+  const minCellHeight = MIN_RELATIVE_CELL_HEIGHT * ctx.canvas.height;
+  const maxCellHeight = MAX_RELATIVE_CELL_HEIGHT * ctx.canvas.height;
 
   const columns = [];
-  let widthLeft = options.width;
+  let widthLeft = ctx.canvas.width;
   for (let column = 0; column < COLUMNS; column++) {
     let columnWidth = random.intBetween(minCellWidth, maxCellWidth);
     columnWidth = Math.min(columnWidth, widthLeft);
@@ -26,7 +39,7 @@ async function generate(username, ctx, random, options) {
     columns[COLUMNS - 1] += widthLeft;
 
   const rows = [];
-  let heightLeft = options.height;
+  let heightLeft = ctx.canvas.height;
   for (let row = 0; row < ROWS; row++) {
     let columnHeight = random.intBetween(minCellHeight, maxCellHeight);
     columnHeight = Math.min(columnHeight, heightLeft);
@@ -43,9 +56,11 @@ async function generate(username, ctx, random, options) {
       drawCell(ctx, random, {x, y}, {width: columns[column], height: rows[row]});
     }
   }
-}
+};
 
-function drawCell(ctx, random, position, size) {
+export type CellDrawer = (ctx: CanvasRenderingContext2D, random: Random, position: {x: number, y: number}, size: {width: number, height: number}) => void;
+
+const drawCell: CellDrawer = (ctx, random, position, size) => {
   ctx.save();
   ctx.beginPath();
   ctx.moveTo(position.x, position.y);
@@ -66,9 +81,9 @@ function drawCell(ctx, random, position, size) {
   }
 
   ctx.restore();
-}
+};
 
-function drawCircleInCell(ctx, random, position, size) {
+const drawCircleInCell: CellDrawer = (ctx, random, position, size) => {
   ctx.fillStyle = random.color();
 
   const x = random.element(position.x, position.x + size.width);
@@ -77,9 +92,9 @@ function drawCircleInCell(ctx, random, position, size) {
   ctx.beginPath();
   ctx.arc(x, y, size.width, 0, 2 * Math.PI);
   ctx.fill();
-}
+};
 
-function drawTriangleInCell(ctx, random, position, size) {
+const drawTriangleInCell: CellDrawer = (ctx, random, position, size) => {
   ctx.fillStyle = random.color();
 
   if (random.bool()) {
@@ -93,9 +108,9 @@ function drawTriangleInCell(ctx, random, position, size) {
   }
 
   ctx.fill();
-}
+};
 
-function drawRectangleInCell(ctx, random, position, size) {
+const drawRectangleInCell: CellDrawer = (ctx, random, position, size) => {
   ctx.fillStyle = random.color();
 
   if (random.bool(0.25)) // Top, scaling towards bottom
@@ -106,6 +121,4 @@ function drawRectangleInCell(ctx, random, position, size) {
     ctx.fillRect(position.x, position.y, random.intBetween(size.width * 0.2, size.width), size.height);
   else // Right, scaling towards the left
     ctx.fillRect(position.x + size.width, position.y, -random.intBetween(size.width * 0.2, size.width), size.height);
-}
-
-module.exports = generate;
+};
