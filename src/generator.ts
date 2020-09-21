@@ -1,6 +1,6 @@
 import {Canvas, CanvasRenderingContext2D} from "skia-canvas";
 
-import Random from "./random";
+import Random from "./utils/random";
 import styles from "./styles";
 
 const MIN_WIDTH = 1;

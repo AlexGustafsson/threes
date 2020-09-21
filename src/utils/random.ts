@@ -51,6 +51,22 @@ export default class Random {
     return new Array(count).fill(null).map(() => this.element(values));
   }
 
+  /** Get one or more random non-repeating elements from a list of values. */
+  combination(count: number, values: any[]) {
+    if (values.length < count)
+      throw new Error("There are not enough values for the given combinations");
+
+    const picked = [];
+    const slice = values.slice();
+    for (let i = 0; i < count; i++) {
+      const index = this.intBetween(0, slice.length);
+      picked.push(slice[index]);
+      slice.splice(index, 1);
+    }
+
+    return picked;
+  }
+
   /** Returns true with a probability roughly following the percentile given. */
   bool(percentile = 0.5) {
     return this.float() <= percentile;
