@@ -67,3 +67,28 @@ export function drawTriangle(arg: Cell | CanvasRenderingContext2D, offset: Offse
     top += arg.offset.top;
   }
 }
+
+/** Creates a hexagon outline within a cell. */
+export function drawHexagon(cell: Cell, offset: Offset, size: Size): void;
+/** Creates a hexagon outline. */
+export function drawHexagon(ctx: CanvasRenderingContext2D, offset: Offset, size: Size): void;
+/** Creates a hexagon outline. */
+export function drawHexagon(arg: Cell | CanvasRenderingContext2D, offset: Offset, size: Size): void {
+  let left = offset.left;
+  let top = offset.top;
+  if (arg instanceof Cell) {
+    left += arg.offset.left;
+    top += arg.offset.top;
+  }
+  const radius = size.width / 2;
+
+  const ctx = arg instanceof Cell ? arg.ctx : arg;
+
+  ctx.beginPath();
+  ctx.moveTo(left + (radius / 2), top); // Top left corner
+  ctx.lineTo(left + size.width - (radius / 2), top); // Top right corner
+  ctx.lineTo(left + size.width, top + size.height / 2); // Middle of right side
+  ctx.lineTo(left + size.width - (radius / 2), top + size.height); // Bottom right corner
+  ctx.lineTo(left + (radius / 2), top + size.height); // Bottom left corner
+  ctx.lineTo(left, top + size.height / 2); // Middle of left side
+}
