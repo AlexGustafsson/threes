@@ -79,7 +79,9 @@ export class Hexagon extends Polygon {
       {left: offset.left + width, top: offset.top + height / 2}, // Right corner
       {left: offset.left + width - width / 4, top: offset.top + height}, // Bottom right corner
       {left: offset.left + width / 4, top: offset.top + height}, // Bottom left corner
-    )
+    );
+
+    this.radius = radius;
   }
 
   get center(): Offset {
@@ -93,7 +95,7 @@ export class Arch extends Shape {
   endPoint: Offset
 
   constructor(startPoint: Offset, endPoint: Offset, controlPoint: Offset) {
-    super(null, null);
+    super({left: 0, top: 0}, {width: 0, height: 0});
 
     this.startPoint = startPoint;
     this.controlPoint = controlPoint;

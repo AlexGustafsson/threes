@@ -1,7 +1,6 @@
 import {GeneratorCallable} from "../generator";
 import {HexGrid} from "../utils/grid";
 import {Hexagon, Arch, Polygon} from "../utils/geometry";
-import Random from "../utils/random";
 
 const SIZE = 10;
 
@@ -30,10 +29,10 @@ export const generator: GeneratorCallable = async (ctx, random) => {
     const triangle = new Polygon(...points);
     cell.draw(ctx => {
       ctx.fillStyle = random.color();
-      ctx.beginPath()
+      ctx.beginPath();
       triangle.draw(ctx);
       arch.draw(ctx);
       ctx.fill();
     });
   }
-}
+};

@@ -41,7 +41,7 @@ export interface GeneratorOptions {
   palette: string | null
 }
 
-export type GeneratorCallable = (ctx: CanvasRenderingContext2D, random: Random) => Promise<void>;
+export type GeneratorCallable = (ctx: CanvasRenderingContext2D, random: Random, options: GeneratorOptions) => Promise<void>;
 
 export default class Generator {
   generator: GeneratorCallable
@@ -69,7 +69,7 @@ export default class Generator {
     const random = new Random(seed);
     random.setPalette(palette);
 
-    this.generator(ctx, random);
+    this.generator(ctx, random, options);
 
     return canvas;
   }

@@ -5,7 +5,7 @@ import {generator as charmGenerator, palette as charmPalette} from "./charm";
 // import {generator as fadedGenerator, palette as fadedPalette} from "./faded";
 // import {generator as geometricGenerator, palette as geometricPalette} from "./geometric";
 // import {generator as githubGenerator, palette as githubPalette} from "./github";
-// import {generator as helsinkiGenerator, palette as helsinkiPalette} from "./helsinki";
+import {generator as helsinkiGenerator, palette as helsinkiPalette} from "./helsinki";
 // import {generator as hexzagGenerator, palette as hexzagPalette} from "./hexzag";
 // import {generator as pizzaGenerator, palette as pizzaPalette} from "./pizza";
 // import {generator as scaleGenerator, palette as scalePalette} from "./scale";
@@ -20,7 +20,7 @@ export default {
   // "faded": {generator: fadedGenerator, palette: fadedPalette},
   // "geometric": {generator: geometricGenerator, palette: geometricPalette},
   // "github": {generator: githubGenerator, palette: githubPalette},
-  // "helsinki": {generator: helsinkiGenerator, palette: helsinkiPalette},
+  "helsinki": {generator: helsinkiGenerator, palette: helsinkiPalette},
   // "hexzag": {generator: hexzagGenerator, palette: hexzagPalette},
   // "pizza": {generator: pizzaGenerator, palette: pizzaPalette},
   // "scale": {generator: scaleGenerator, palette: scalePalette},
