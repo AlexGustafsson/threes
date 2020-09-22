@@ -37,6 +37,7 @@
       padding: 10px;
       font-size: 16px;
       align-items: center;
+      margin-bottom: 40px;
     }
 
     input {
@@ -50,14 +51,15 @@
     main {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 320));
-      /* justify-items: center; */
+      justify-content: center;
+      justify-items: center;
       width: 100%;
     }
 
     article {
       display: flex;
       flex-direction: column;
-      min-width: 150px;
+      min-width: 100px;
       max-width: 320px;
       width: 80%;
     }
@@ -96,6 +98,18 @@
 
       input {
         color: #858585;
+      }
+    }
+
+    @media (max-width: 720px) {
+      main {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      main {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -138,13 +152,11 @@
           paletteItems.push(`<li style="background-color: ${color}; color: transparent;">${color}</li>`);
       }
       element.innerHTML = `
-      <article>
-        <h2>${style}</h2>
-        <img loading=lazy src="/avatar/${style}/${seed}.png?width=${width}&height=${height}" />
-        <ul class="palette">
-          ${paletteItems.join('\n')}
-        </ul>
-      </article>
+      <h2>${style}</h2>
+      <img loading=lazy src="/avatar/${style}/${seed}.png?width=${width}&height=${height}" />
+      <ul class="palette">
+        ${paletteItems.join('\n')}
+      </ul>
       `;
       return element;
     }
