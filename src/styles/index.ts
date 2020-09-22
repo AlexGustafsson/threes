@@ -14,6 +14,8 @@ import {generator as scandinavianGenerator, palette as scandinavianPalette} from
 // import {generator as threesGenerator, palette as threesPalette} from "./threes";
 // import {generator as tributeGenerator, palette as tributePalette} from "./tribute";
 
+export type Style = {generator: GeneratorCallable, palette?: string[]};
+
 export default {
   "charm": {generator: charmGenerator, palette: charmPalette},
   // "cross-stitch": {generator: crossStitchGenerator, palette: crossStitchPalette},
@@ -28,4 +30,4 @@ export default {
   // "stackexchange": {generator: stackexchangeGenerator, palette: stackexchangePalette},
   // "threes": {generator: threesGenerator, palette: threesPalette},
   // "tribute": {generator: tributeGenerator, palette: tributePalette}
-} as {[key: string]: {generator: GeneratorCallable, palette?: string[]}};
+} as {[key: string]: Style};

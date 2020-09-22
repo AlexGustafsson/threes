@@ -20,32 +20,136 @@
       -webkit-font-smoothing: antialiased;
       font-weight: normal;
       margin: 5px;
+      vertical-align: middle;
     }
 
     body {
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+
+    .input {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-content: flex-start;
+      align-self: center;
+      background-color: white;
+      padding: 10px;
+      font-size: 16px;
+      align-items: center;
     }
 
-    .style-name {
-      text-transform: capitalize;
+    input {
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .style-examples {
+    main {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 320));
+      /* justify-items: center; */
+      width: 100%;
+    }
+
+    article {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      min-width: 150px;
+      max-width: 320px;
+      width: 80%;
     }
 
-    .style-example {
-      margin: 10px;
+    .palette {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+
+    img {
+      display: block;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
     }
   </style>
 </head>
 <body>
-  {{body}}
+  <div class="input">
+    <p>image seed:</p>
+    <input id="seed" type="text" placeholder="seed" value="threes"></input>
+    <svg onclick="updateSeed()" style="cursor: pointer" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+  </div>
+  <main id="styles">
+
+  </main>
+  <script>
+    function updateSeed() {
+      const seed = document.getElementById("seed").value;
+      renderStyles(seed);
+    }
+
+    function sortPalette(palette) {
+      palette.sort((a, b) => calculateHSP(b) - calculateHSP(a));
+      return palette;
+    }
+
+    function calculateHSP(color) {
+      const matches = color.match(/#(..)(..)(..)/);
+      if (!matches)
+        throw new Error("Got bad hex color");
+      const [_, r, g, b] = matches.map(x => parseInt(x, 16));
+      const hsp = Math.sqrt((0.299 * r * r) + (0.587 * g * g) + (0.114 * b * b));
+
+      return hsp;
+    }
+
+    function createStyleItem(style, palette, seed, width, height) {
+      const element = document.createElement('article');
+      const paletteItems = [];
+      if (palette) {
+        for (color of sortPalette(palette))
+          paletteItems.push(`<li style="background-color: ${color}; color: transparent;">${color}</li>`);
+      }
+      element.innerHTML = `
+      <article>
+        <h2>${style}</h2>
+        <img loading=lazy src="/avatar/${style}/${seed}.png?width=${width}&height=${height}" />
+        <ul class="palette">
+          ${paletteItems.join('\n')}
+        </ul>
+      </article>
+      `;
+      return element;
+    }
+
+    async function renderStyles(seed) {
+      const container = document.getElementById('styles');
+      while(container.firstChild)
+        container.removeChild(container.firstChild);
+
+      try {
+        const styles = await (await fetch('/styles')).json();
+        const palettes = await (await fetch('/palettes')).json();
+        for (const style of styles)
+          container.appendChild(createStyleItem(style, palettes[style], seed, 320, 320));
+      } catch (error) {
+        alert(error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => renderStyles('threes'));
+  </script>
 </body>
 </html>

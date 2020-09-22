@@ -4,8 +4,9 @@ import express from "express";
 import {Request, Response, NextFunction} from "express";
 
 import styles from "./styles";
+import {Style} from "./styles";
 import Generator from "./generator";
-import demo from "./demo";
+import {demoPage} from "./demo";
 
 const PORT = process.env["THREES_PORT"] || 3000;
 // Cache images for a month by default
@@ -30,15 +31,17 @@ if (process.env.NODE_ENV && process.env.NODE_ENV === "production") {
   });
 }
 
+// CORS middleware
+app.use((_: Request, res: Response, next: NextFunction) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 // GET endpoint for a suite of avatars, not available in production
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
-  app.get("/suite/:seed", (req: Request, res: Response) => {
+  app.get("/demo", (_: Request, res: Response) => {
     res.contentType("text/html");
-    const {seed} = req.params;
-    let body = "";
-    for (const style of Object.keys(styles))
-      body += demo.generatorTemplate.replace(/\{\{style\}\}/g, style).replace(/\{\{seed\}\}/g, seed);
-    res.send(demo.source.replace(/\{\{body\}\}/g, body));
+    res.send(demoPage);
   });
 }
 
@@ -81,6 +84,29 @@ async function processStyle(req: Request, res: Response) {
 // GET endpoint for a single style and seed
 app.get("/avatar/:style/:seed.:format", async (req: Request, res: Response) => {
   processStyle(req, res);
+});
+
+// GET endpoint for a palette
+app.get("/palette/:style", (req: Request, res: Response) => {
+  const {style} = req.params;
+  const palette: string[] | null = styles[style] ? styles[style].palette || null : null;
+  if (!palette) {
+    res.status(404);
+    return res.end();
+  }
+
+  res.contentType("application/json");
+  res.send(JSON.stringify(palette));
+});
+
+app.get("/palettes", (_: Request, res: Response) => {
+  const palettes: {[key: string]: string[]} = {}
+  for (const [name, {palette}] of Object.entries(styles) as [string, Style][]) {
+    if (palette)
+      palettes[name] = palette;
+  }
+  res.contentType("application/json");
+  res.send(JSON.stringify(palettes));
 });
 
 // GET endpoint for all available styles
