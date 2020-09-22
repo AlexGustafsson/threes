@@ -1,5 +1,6 @@
 import {GeneratorCallable} from "../generator";
 
+import {palette as defaultPalette} from "./default";
 import {generator as charmGenerator, palette as charmPalette} from "./charm";
 // import {generator as crossStitchGenerator, palette as crossStitchPalette} from "./cross-stitch";
 // import {generator as fadedGenerator, palette as fadedPalette} from "./faded";
@@ -14,9 +15,10 @@ import {generator as scandinavianGenerator, palette as scandinavianPalette} from
 // import {generator as threesGenerator, palette as threesPalette} from "./threes";
 // import {generator as tributeGenerator, palette as tributePalette} from "./tribute";
 
-export type Style = {generator: GeneratorCallable, palette?: string[]};
+export type Style = {generator?: GeneratorCallable, palette?: string[]};
 
 export default {
+  "default": {palette: defaultPalette},
   "charm": {generator: charmGenerator, palette: charmPalette},
   // "cross-stitch": {generator: crossStitchGenerator, palette: crossStitchPalette},
   // "faded": {generator: fadedGenerator, palette: fadedPalette},

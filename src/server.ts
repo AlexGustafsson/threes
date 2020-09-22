@@ -110,9 +110,9 @@ app.get("/palettes", (_: Request, res: Response) => {
 });
 
 // GET endpoint for all available styles
-app.get("/styles", (req: Request, res: Response) => {
+app.get("/styles", (_: Request, res: Response) => {
   res.contentType("application/json");
-  res.send(JSON.stringify(Object.keys(styles)));
+  res.send(JSON.stringify(Object.keys(styles).filter(style => styles[style].generator)));
 });
 
 app.listen(PORT);
