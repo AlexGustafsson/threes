@@ -3,8 +3,8 @@ import {Canvas, CanvasRenderingContext2D} from "skia-canvas";
 import Random from "./utils/random";
 import styles from "./styles";
 
-const MIN_WIDTH = 1;
-const MIN_HEIGHT = 1;
+const MIN_WIDTH = 32;
+const MIN_HEIGHT = 32;
 
 const MAX_WIDTH = 1024;
 const MAX_HEIGHT = 1024;
