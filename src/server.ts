@@ -39,7 +39,7 @@ app.use((_: Request, res: Response, next: NextFunction) => {
 
 // GET endpoint for a suite of avatars, not available in production
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
-  app.get("/demo", (_: Request, res: Response) => {
+  app.get("/", (_: Request, res: Response) => {
     res.contentType("text/html");
     res.send(demoPage);
   });

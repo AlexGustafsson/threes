@@ -59,7 +59,7 @@ The API specifications can be used alongside software such as [Insomnia Designer
 
 ##### Demo page
 
-When run in development mode, a demo page is available to show all available styles. The demo page is available at `/demo` and shown in the image at the top of this document.
+When run in development mode, a demo page is available to show all available styles. The demo page is available at the root of the server (`/`) and shown in the image at the top of this document.
 
 ### Contributing
 
