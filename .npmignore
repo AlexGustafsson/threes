@@ -1,0 +1,9 @@
+# Ignore TypeScript source
+src
+
+# Ignore tests and development files
+test
+.*
+Dockerfile
+tsconfig.json
+api.v1.yml
