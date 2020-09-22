@@ -1,0 +1,127 @@
+openapi: "3.0.0"
+
+info:
+  title: Threes
+  description: Avatar as a Service
+  version: 0.0.7
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: avatar
+    description: Avatar operations
+  - name: palette
+    description: Palette operations
+  - name: style
+    description: Description operations
+
+
+paths:
+  /avatar/{style}/{seed}.{format}:
+    get:
+      tags:
+        - avatar
+      summary: Generate an avatar.
+      parameters:
+        - $ref: '#/components/parameters/style'
+        - $ref: '#/components/parameters/seed'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '404':
+          description: Style not found.
+        '500':
+          description: The generation failed.
+        '200':
+          description: OK.
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+
+  /palettes:
+    get:
+      tags:
+        - palette
+      summary: Retrieve all available palettes.
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+                  description: Colors in the palette.
+                  example: "#f3a683"
+                example:
+                  scandinavian: ["#f3a683", "#f7d794", "#778beb"]
+  /palette/{style}:
+    get:
+      tags:
+        - palette
+      summary: Retrieve a palette by style.
+      parameters:
+        - $ref: '#/components/parameters/style'
+      responses:
+        '404':
+          description: No such style.
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                description: Colors in the palette.
+                example: ["#f3a683", "#f7d794", "#778beb"]
+
+  /styles:
+    get:
+      tags:
+        - style
+      summary: Retrieve all available styles.
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                description: Available styles.
+                example: ["helsinki", "scandinavian"]
+
+components:
+  parameters:
+    style:
+      in: path
+      name: style
+      schema:
+        type: string
+        example: scandinavian
+      required: true
+      description: The style to use for generation.
+    seed:
+      in: path
+      name: seed
+      schema:
+        type: string
+        example: threes
+      required: true
+      description: The seed to use for generation.
+    format:
+      in: path
+      name: format
+      schema:
+        type: string
+        enum: [png, jpg, jpeg, svg]
+        example: png
+      required: true
+      description: The format to use for generation.

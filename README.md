@@ -35,6 +35,8 @@ npm run start
 
 ### Documentation
 
+#### Deploying
+
 The project is easily run by using Docker:
 
 ```
@@ -42,65 +44,22 @@ docker build -t threes:latest .
 docker run -p 3000:3000 threes
 ```
 
+Or directly using `npx`:
+
+```
+npx threes
+```
+
 #### API
 
-Once started, the following API endpoints are available:
+The exposed API is versioned and documented using OpenAPI in the following files:
+  * `api.v1.yml`
 
-##### `GET /styles`
+The API specifications can be used alongside software such as [Insomnia Designer or Insomnia Core](https://insomnia.rest/download/#mac) or the online [Swagger editor](https://editor.swagger.io).
 
-Get the available style names as JSON.
+##### Demo page
 
-```json
-[
-  "scandinavian"
-]
-```
-
-##### `GET /palettes`
-
-Get the available palettes names as JSON.
-
-```json
-{
-  "charm":["#3ABAAD","#D52B5F","#336091","#FBF3D7","#F69257","#4D235B"],
-  "helsinki":["#50BD9D","#F37022","#2F3296","#C89A4E","#F6A4CA","#E73126","#0374BD","#9FCAEC"],
-  "scandinavian":["#37313F","#A09EB1","#EAE0E1","#E0B4C1","#C13E68","#404B78","#0EB285"]
-}
-```
-
-#### `GET /palette/:style`
-
-Get a palette by its style.
-
-```json
-[
-  "#3ABAAD",
-  "#D52B5F",
-  "#336091",
-  "#FBF3D7",
-  "#F69257",
-  "#4D235B"
-]
-```
-
-##### `GET /avatar/:style/:seed.:format`
-
-Get a avatar for the given style and seed (such as a user's username or id). The format is expected to be one of:
-
-* `png`
-* `jpg`
-* `jpeg`
-* `svg`
-
-Example:
-
-```
-/avatar/scandinavian/threes.png
-```
-
-##### `GET /demo`
-
-When run in development mode, the demo page is available to show all available styles. The demo page is shown in the image at the top of this document.
+When run in development mode, a demo page is available to show all available styles. The demo page is available at `/demo` and shown in the image at the top of this document.
 
 ### Contributing
 
