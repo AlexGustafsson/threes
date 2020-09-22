@@ -43,6 +43,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 }
 
 async function processStyle(req: Request, res: Response) {
+  const start = process.hrtime.bigint();
   const {seed, style, format} = req.params;
 
   const mime = supportedMimeTypes[format];
@@ -66,7 +67,9 @@ async function processStyle(req: Request, res: Response) {
     res.contentType(mime);
     const buffer = canvas.toBuffer(format);
     res.send(buffer);
-    debug(`Generated avatar seed=${seed} style=${style} format=${format}`);
+    const end = process.hrtime.bigint();
+    const duration = (end - start) / 1000000n;
+    debug(`Generated avatar seed=${seed} style=${style} format=${format} duration=${duration}ms`);
   } catch (error) {
     debug(`Got an error while generating avatar seed=${seed} style=${style} format=${format}`);
     console.error(error);
