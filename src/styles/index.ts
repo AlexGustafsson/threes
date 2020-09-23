@@ -9,7 +9,7 @@ import {generator as charmGenerator, palette as charmPalette} from "./charm";
 import {generator as helsinkiGenerator, palette as helsinkiPalette} from "./helsinki";
 // import {generator as hexzagGenerator, palette as hexzagPalette} from "./hexzag";
 // import {generator as pizzaGenerator, palette as pizzaPalette} from "./pizza";
-// import {generator as scaleGenerator, palette as scalePalette} from "./scale";
+import {generator as scaleGenerator, palette as scalePalette} from "./scale";
 import {generator as scandinavianGenerator, palette as scandinavianPalette} from "./scandinavian";
 // import {generator as stackexchangeGenerator, palette as stackexchangePalette} from "./stackexchange";
 // import {generator as threesGenerator, palette as threesPalette} from "./threes";
@@ -27,7 +27,7 @@ export default {
   "helsinki": {generator: helsinkiGenerator, palette: helsinkiPalette},
   // "hexzag": {generator: hexzagGenerator, palette: hexzagPalette},
   // "pizza": {generator: pizzaGenerator, palette: pizzaPalette},
-  // "scale": {generator: scaleGenerator, palette: scalePalette},
+  "scale": {generator: scaleGenerator, palette: scalePalette},
   "scandinavian": {generator: scandinavianGenerator, palette: scandinavianPalette},
   // "stackexchange": {generator: stackexchangeGenerator, palette: stackexchangePalette},
   // "threes": {generator: threesGenerator, palette: threesPalette},
