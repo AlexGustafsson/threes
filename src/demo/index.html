@@ -157,7 +157,7 @@
       }
       element.innerHTML = `
       <h2>${style}</h2>
-      <img loading=lazy src="/avatar/${style}/${seed}.png?width=${width}&height=${height}" />
+      <img loading=lazy src="/api/v1/avatar/${style}/${seed}.png?width=${width}&height=${height}" />
       <ul class="palette">
         ${paletteItems.join('\n')}
       </ul>
@@ -171,8 +171,8 @@
         container.removeChild(container.firstChild);
 
       try {
-        const styles = await (await fetch('/styles')).json();
-        const palettes = await (await fetch('/palettes')).json();
+        const styles = await (await fetch('/api/v1/styles')).json();
+        const palettes = await (await fetch('/api/v1/palettes')).json();
         for (const style of styles)
           container.appendChild(createStyleItem(style, palettes[style] || palettes['default'], seed, 320, 320));
       } catch (error) {

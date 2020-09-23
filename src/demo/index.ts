@@ -1,8 +1,14 @@
 import {readFileSync} from "fs";
 import {resolve} from "path";
 
-function read(filename: string): string {
-  return readFileSync(resolve(__dirname, filename)).toString();
-}
+import {Router, Request, Response} from "express";
 
-export const demoPage = read("./index.html");
+const router = Router();
+export default router;
+
+const demoPage = readFileSync(resolve(__dirname, "./index.html")).toString();
+
+router.get("/", (_: Request, res: Response) => {
+  res.contentType("text/html");
+  res.send(demoPage);
+});
