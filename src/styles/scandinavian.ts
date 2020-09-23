@@ -22,8 +22,7 @@ export const generator: GeneratorCallable = async (ctx, random) => {
   for (const cell of grid.cells) {
     cell.draw(ctx => {
       // Fill the background
-      ctx.fillStyle = random.color();
-      ctx.fillRect(cell.shape.offset.left, cell.shape.offset.top, cell.shape.size.width, cell.shape.size.height);
+      cell.fill(random.color());
 
       // Gather three random points
       const points = random.sequence(3, (cell.shape as Polygon).points);

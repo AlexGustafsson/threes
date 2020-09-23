@@ -67,6 +67,10 @@ export class SquareGrid extends Grid {
 
     super(ctx, columns, rows, cells);
   }
+
+  getCell(column: number, row: number): Cell {
+    return this.cells[row * this.columns + column];
+  }
 }
 
 export class HexGrid extends Grid {

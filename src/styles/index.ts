@@ -5,7 +5,7 @@ import {generator as charmGenerator, palette as charmPalette} from "./charm";
 // import {generator as crossStitchGenerator, palette as crossStitchPalette} from "./cross-stitch";
 // import {generator as fadedGenerator, palette as fadedPalette} from "./faded";
 // import {generator as geometricGenerator, palette as geometricPalette} from "./geometric";
-// import {generator as githubGenerator, palette as githubPalette} from "./github";
+import {generator as githubGenerator, palette as githubPalette} from "./github";
 import {generator as helsinkiGenerator, palette as helsinkiPalette} from "./helsinki";
 // import {generator as hexzagGenerator, palette as hexzagPalette} from "./hexzag";
 // import {generator as pizzaGenerator, palette as pizzaPalette} from "./pizza";
@@ -23,7 +23,7 @@ export default {
   // "cross-stitch": {generator: crossStitchGenerator, palette: crossStitchPalette},
   // "faded": {generator: fadedGenerator, palette: fadedPalette},
   // "geometric": {generator: geometricGenerator, palette: geometricPalette},
-  // "github": {generator: githubGenerator, palette: githubPalette},
+  "github": {generator: githubGenerator, palette: githubPalette},
   "helsinki": {generator: helsinkiGenerator, palette: helsinkiPalette},
   // "hexzag": {generator: hexzagGenerator, palette: hexzagPalette},
   // "pizza": {generator: pizzaGenerator, palette: pizzaPalette},
