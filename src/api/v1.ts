@@ -1,4 +1,6 @@
 import {Router, Request, Response} from "express";
+import Debug from "debug";
+const debug = Debug("threes:api");
 
 import styles from "../styles";
 import {Style} from "../styles";
@@ -41,9 +43,9 @@ async function processStyle(req: Request, res: Response) {
     res.send(buffer);
     const end = process.hrtime.bigint();
     const duration = (end - start) / 1000000n;
-    debug(`Generated avatar seed=${seed} style=${style} format=${format} duration=${duration}ms`);
+    debug(`Generated avatar seed='${seed}' style=${style} format=${format} duration=${duration}ms`);
   } catch (error) {
-    debug(`Got an error while generating avatar seed=${seed} style=${style} format=${format}`);
+    debug(`Got an error while generating avatar seed='${seed}' style=${style} format=${format}`);
     console.error(error);
     res.status(500);
     return res.end();
