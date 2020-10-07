@@ -8,6 +8,22 @@ export interface Size {
   height: number
 }
 
+export class Relative {
+  percentage: number
+  min: number
+  max: number
+
+  constructor(percentage: number, min: number, max: number) {
+    this.percentage = percentage;
+    this.min = min;
+    this.max = max;
+  }
+
+  calculateValue(ctx: CanvasRenderingContext2D): number {
+    return Math.min(this.max, Math.max(this.min, Math.min(ctx.canvas.width, ctx.canvas.height) * this.percentage));
+  }
+}
+
 export abstract class Shape {
   offset: Offset
   size: Size
@@ -19,7 +35,6 @@ export abstract class Shape {
 
   abstract draw(ctx: CanvasRenderingContext2D): void;
 }
-
 
 export class Polygon extends Shape {
   points: Offset[];
@@ -48,9 +63,19 @@ export class Polygon extends Shape {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    ctx.moveTo(this.points[0].left, this.points[0].top);
+    ctx.lineTo(this.points[0].left, this.points[0].top);
     for (let i = 1; i < this.points.length; i++)
       ctx.lineTo(this.points[i].left, this.points[i].top);
+  }
+}
+
+export type CurveGenerator = (x: number) => number;
+export class Curve extends Polygon {
+  constructor(gap: number, from: number, to: number, generator: CurveGenerator) {
+    const points: Offset[] = [];
+    for (let x = from; x < to; x += gap)
+      points.push({left: x, top: generator(x)});
+    super(...points);
   }
 }
 
