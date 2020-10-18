@@ -9,6 +9,7 @@ import {generator as scandinavianGenerator, palette as scandinavianPalette} from
 import {generator as tributeGenerator, palette as tributePalette} from "./tribute";
 import {generator as aztecGenerator, palette as aztecPalette} from "./aztec";
 import {generator as gradientGenerator, palette as gradientPalette} from "./gradient";
+import {generator as radialGenerator, palette as radialPalette} from "./radial";
 
 export type Style = {generator?: GeneratorCallable, palette?: string[]};
 
@@ -21,5 +22,6 @@ export default {
   "scandinavian": {generator: scandinavianGenerator, palette: scandinavianPalette},
   "tribute": {generator: tributeGenerator, palette: tributePalette},
   "aztec": {generator: aztecGenerator, palette: aztecPalette},
-  "gradient": {generator: gradientGenerator, palette: gradientPalette}
+  "gradient": {generator: gradientGenerator, palette: gradientPalette},
+  "radial": {generator: radialGenerator, palette: radialPalette}
 } as {[key: string]: Style};
