@@ -8,18 +8,18 @@ import {Circle, Polygon, Shape} from "../utils/geometry";
 
 const COLUMNS = 5;
 const ROWS = 5;
-const BACKGROUND = '#F0F0F0';
+const BACKGROUND = "#F0F0F0";
 
 // Taken from random users' GitHub profiles
 export const palette = [
-  '#00A29B',
-  '#F68498',
-  '#F2BC4B',
-  '#282149',
-  '#FFB3C3',
-  '#E76234',
-  '#F58397',
-  '#F8F9EC'
+  "#00A29B",
+  "#F68498",
+  "#F2BC4B",
+  "#282149",
+  "#FFB3C3",
+  "#E76234",
+  "#F58397",
+  "#F8F9EC"
 ];
 
 export const generator: GeneratorCallable = async (ctx, random) => {
@@ -33,7 +33,7 @@ export const generator: GeneratorCallable = async (ctx, random) => {
   const canvas = drawContent(ctx.canvas.width, ctx.canvas.height, random);
   ctx.imageSmoothingEnabled = true;
   ctx.drawImage((canvas as unknown) as CanvasImageSource, margin, margin, ctx.canvas.width - margin * 2, ctx.canvas.height - margin * 2);
-}
+};
 
 function drawContent(width: number, height: number, random: Random): Canvas {
   // Create a canvas with content which can easily be scaled

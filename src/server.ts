@@ -34,7 +34,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 }
 
 // API v1
-app.use('/api/v1', v1);
+app.use("/api/v1", v1);
 
 app.listen(PORT);
 debug(`Listening on :${PORT}`);

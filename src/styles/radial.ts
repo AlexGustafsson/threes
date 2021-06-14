@@ -65,4 +65,4 @@ export const generator: GeneratorCallable = async (ctx, random) => {
       ctx.stroke();
     }
   }
-}
+};

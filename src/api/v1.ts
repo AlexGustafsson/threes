@@ -39,7 +39,7 @@ async function processStyle(req: Request, res: Response) {
   try {
     const canvas = await generator.generate(seed, {width, height, style, format, palette});
     res.contentType(mime);
-    const buffer = canvas.toBuffer(format);
+    const buffer = await canvas.toBuffer(format);
     res.send(buffer);
     const end = process.hrtime.bigint();
     const duration = (end - start) / 1000000n;
@@ -71,7 +71,7 @@ router.get("/palette/:style", (req: Request, res: Response) => {
 });
 
 router.get("/palettes", (_: Request, res: Response) => {
-  const palettes: {[key: string]: string[]} = {}
+  const palettes: {[key: string]: string[]} = {};
   for (const [name, {palette}] of Object.entries(styles) as [string, Style][]) {
     if (palette)
       palettes[name] = palette;

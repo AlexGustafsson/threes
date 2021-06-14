@@ -42,7 +42,7 @@ export const generator: GeneratorCallable = async (ctx, random) => {
   ctx.imageSmoothingEnabled = true;
   const canvas = drawContent(hypotenuse, random);
   ctx.drawImage((canvas as unknown) as CanvasImageSource, (ctx.canvas.width - hypotenuse) / 2, (ctx.canvas.height - hypotenuse) / 2, hypotenuse, hypotenuse);
-}
+};
 
 function drawContent(hypotenuse: number, random: Random): Canvas {
   // Create a canvas with content which can easily be scaled
@@ -70,7 +70,7 @@ function drawContent(hypotenuse: number, random: Random): Canvas {
     // Create a random curve for the user
     const frequencyOffset = random.floatBetween(MIN_FREQUENCY_OFFSET / (FREQUENCY_SCALE * hypotenuse), MAX_FREQUENCY_OFFSET / (FREQUENCY_SCALE * hypotenuse));
     const periodOffset = random.intBetween(0, 360);
-    const curve = new Curve(Math.max(1, GAP * hypotenuse), -10, ctx.canvas.width + 10, x => CURVE_SCALE * hypotenuse * Math.sin((x + periodOffset) * frequencyOffset * 180 / Math.PI))
+    const curve = new Curve(Math.max(1, GAP * hypotenuse), -10, ctx.canvas.width + 10, x => CURVE_SCALE * hypotenuse * Math.sin((x + periodOffset) * frequencyOffset * 180 / Math.PI));
 
     // Draw the curves in reverse order so that each gradient covers the before
     ctx.beginPath();

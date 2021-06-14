@@ -1,9 +1,5 @@
 import {CanvasRenderingContext2D} from "skia-canvas";
 
-import {Offset, Size} from "./geometry";
-
-import {Cell} from "./grid";
-
 /** Rotate a canvas around its center. */
 export function rotateAroundCenter(ctx: CanvasRenderingContext2D, degrees: number) {
   ctx.resetTransform();

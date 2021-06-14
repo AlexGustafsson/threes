@@ -1,13 +1,13 @@
-import seedrandom from "seedrandom";
+import { alea } from "seedrandom";
 
 /** Utility class for handling a random seed. */
 export default class Random {
-  random: seedrandom.prng
+  random: ReturnType<typeof alea>
   palette: string[] | null
 
   /** Create a random object using the given seed. */
   constructor(seed: string) {
-    this.random = seedrandom(seed);
+    this.random = alea(seed);
     this.palette = null;
   }
 

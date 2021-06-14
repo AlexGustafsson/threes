@@ -4,19 +4,19 @@ import {Offset} from "../utils/geometry";
 
 // Taken from: https://dribbble.com/shots/5838539-Bright-Fish-Scale-Pattern
 export const palette = [
-  '#00A29B',
-  '#F68498',
-  '#F2BC4B',
-  '#282149',
-  '#FFB3C3',
-  '#E76234',
-  '#F58397',
-  '#F8F9EC'
+  "#00A29B",
+  "#F68498",
+  "#F2BC4B",
+  "#282149",
+  "#FFB3C3",
+  "#E76234",
+  "#F58397",
+  "#F8F9EC"
 ];
 
 // Taken from: https://dribbble.com/shots/5838539-Bright-Fish-Scale-Pattern
 export const generator: GeneratorCallable = async (ctx, random) => {
-  const backgroundColor = '#F8F9EC';
+  const backgroundColor = "#F8F9EC";
   ctx.fillStyle = backgroundColor;
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
@@ -38,11 +38,11 @@ export const generator: GeneratorCallable = async (ctx, random) => {
 
     offset = !offset;
   }
-}
+};
 
 function drawCircle(ctx: CanvasRenderingContext2D, random: Random, origin: Offset, radius: number) {
   ctx.fillStyle = random.color();
-  ctx.strokeStyle = '#F8F9EC';
+  ctx.strokeStyle = "#F8F9EC";
   ctx.lineWidth = Math.round(0.05 * radius);
 
   ctx.beginPath();

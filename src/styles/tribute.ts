@@ -5,14 +5,14 @@ import {Offset} from "../utils/geometry";
 
 // Taken from: https://dribbble.com/shots/1000766-A-tribute-to-Julio-Le-Parc
 export const palette = [
-  '#F7E061',
-  '#FD6344',
-  '#E33257',
-  '#CD2563',
-  '#95317F',
-  '#65287F',
-  '#3C3388',
-  '#0530A2'
+  "#F7E061",
+  "#FD6344",
+  "#E33257",
+  "#CD2563",
+  "#95317F",
+  "#65287F",
+  "#3C3388",
+  "#0530A2"
 ];
 
 // Taken from: https://dribbble.com/shots/1000766-A-tribute-to-Julio-Le-Parc
@@ -29,7 +29,7 @@ export const generator: GeneratorCallable = async (ctx, random) => {
   const radius = Math.max(ctx.canvas.width, ctx.canvas.height);
 
   drawCircles(ctx, random, origin, levels, radius, backgroundColor);
-}
+};
 
 function drawCircles(ctx: CanvasRenderingContext2D, random: Random, origin: Offset, levels: number, radius: number, background: string) {
   let previousRadius = null;
@@ -43,7 +43,7 @@ function drawCircles(ctx: CanvasRenderingContext2D, random: Random, origin: Offs
 
     if (previousRadius !== null) {
       ctx.save();
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+      ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
       ctx.beginPath();
       ctx.arc(origin.left, origin.top, previousRadius, 0, 2 * Math.PI);
       ctx.clip();

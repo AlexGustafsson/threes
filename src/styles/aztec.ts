@@ -18,19 +18,19 @@ const STROKE_WIDTH = MAX_STROKE_WIDTH;
 
 // Taken from: https://dribbble.com/shots/5838539-Bright-Fish-Scale-Pattern
 export const palette = [
-  '#00A29B',
-  '#F68498',
-  '#F2BC4B',
-  '#282149',
-  '#FFB3C3',
-  '#E76234',
-  '#F58397',
-  '#F8F9EC'
+  "#00A29B",
+  "#F68498",
+  "#F2BC4B",
+  "#282149",
+  "#FFB3C3",
+  "#E76234",
+  "#F58397",
+  "#F8F9EC"
 ];
 
 export const generator: GeneratorCallable = async (ctx, random) => {
   const maxSide = Math.max(ctx.canvas.width, ctx.canvas.height);
-  const hypotenuse = Math.sqrt(Math.pow(maxSide, 2) + Math.pow(maxSide, 2))
+  const hypotenuse = Math.sqrt(Math.pow(maxSide, 2) + Math.pow(maxSide, 2));
   const scale = hypotenuse / maxSide;
   const canvas = drawContent(ctx.canvas.width * scale, ctx.canvas.height * scale, random);
 
@@ -78,7 +78,7 @@ export const generator: GeneratorCallable = async (ctx, random) => {
   ctx.lineCap = "round";
   ctx.strokeStyle = STROKE_COLOR;
 
-  for (let [shutter, a, b] of shutters) {
+  for (const [shutter, a, b] of shutters) {
     ctx.save();
     // Clip to the polygon (shutter)
     ctx.beginPath();
@@ -97,7 +97,7 @@ export const generator: GeneratorCallable = async (ctx, random) => {
     ctx.lineTo(shutter.points[b].left, shutter.points[b].top);
     ctx.stroke();
   }
-}
+};
 
 function drawContent(width: number, height: number, random: Random): Canvas {
   // Create a canvas with content which can easily be scaled
