@@ -1,6 +1,6 @@
 {
   "name": "threes",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "Easily create avatars from a username - Avatar as a Service",
   "main": "dist/server.js",
   "bin": {
