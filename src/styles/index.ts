@@ -10,6 +10,7 @@ import {generator as tributeGenerator, palette as tributePalette} from "./tribut
 import {generator as aztecGenerator, palette as aztecPalette} from "./aztec";
 import {generator as gradientGenerator, palette as gradientPalette} from "./gradient";
 import {generator as radialGenerator, palette as radialPalette} from "./radial";
+import {generator as bishopGenerator, palette as bishopPalette} from "./bishop";
 
 export type Style = {generator?: GeneratorCallable, palette?: string[]};
 
@@ -23,5 +24,6 @@ export default {
   "tribute": {generator: tributeGenerator, palette: tributePalette},
   "aztec": {generator: aztecGenerator, palette: aztecPalette},
   "gradient": {generator: gradientGenerator, palette: gradientPalette},
-  "radial": {generator: radialGenerator, palette: radialPalette}
+  "radial": {generator: radialGenerator, palette: radialPalette},
+  "bishop": { generator: bishopGenerator, palette: bishopPalette}
 } as {[key: string]: Style};
